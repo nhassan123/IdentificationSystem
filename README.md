@@ -11,14 +11,19 @@ This repository contains code to implement a simple identification software that
 Add pictures of people you want to be able to identify into the Database folder. Make sure that there is only one visible face in each image that you store. Label the folder with the person's name. You only need to add one image per person. 
 
 Once you have added the images to the dataset folder, run the following script. 
-```python encodeFaces.py --dataset dataset --encodings encodings.pickle --detection-method hog
+
+Give an example
+```
+python encodeFaces.py --dataset dataset --encodings encodings.pickle --detection-method hog
 ```
 This script will create encodings of each face in your dataset and store them as a Pickle file. 
 
 ## Running the Application with a WebCam
 You can run the application and get it to recognize faces in real-time through your webcam. 
 
-```python faces_video_ver2.py --encodings encodings.pickle --output webcam.avi --detection-method hog
+```
+python faces_video_ver2.py --encodings encodings.pickle --output webcam.avi --detection-method hog
+
 ```
 ## Acknowledgements
 
