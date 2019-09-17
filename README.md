@@ -12,7 +12,6 @@ Add pictures of people you want to be able to identify into the Database folder.
 
 Once you have added the images to the dataset folder, run the following script. 
 
-Give an example
 ```
 python encodeFaces.py --dataset dataset --encodings encodings.pickle --detection-method hog
 ```
