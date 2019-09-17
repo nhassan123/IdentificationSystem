@@ -26,5 +26,7 @@ python faces_video_ver2.py --encodings encodings.pickle --output webcam.avi --de
 ```
 ## Acknowledgements
 
+Adrian Rosebrock from pyimagesearch wrote a [tutorial](https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/) that helped guide this project 
+
 
 
