@@ -1,0 +1,20 @@
+<html>
+ <head>
+    <title>Microblog</title>
+     <link rel = stylesheet type = text/css href="{{ url_for('static', filename='style.css')}}">
+ </head>
+
+ <body>
+    <center>
+    <h1> Choose a picture to identify person!</h1>
+    <html>
+    <form method="POST" action="http://localhost:5000/recognize" enctype=multipart/form-data>
+            File : <input type="file" name="image"><br />
+            <input type="submit" value="submit"><br />
+    </form>
+    </center>
+    
+ </body>
+
+<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+</html>
