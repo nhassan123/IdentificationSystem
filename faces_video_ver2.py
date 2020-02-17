@@ -58,7 +58,7 @@ while True:
 		model=args["detection_method"])
 	encodings = face_recognition.face_encodings(rgb, boxes)
 	names = []
-        scores = []
+	scores = []
 
 	# loop over the facial embeddings
 	for encoding in encodings:
@@ -66,29 +66,27 @@ while True:
 		# encodings
 		#matches = face_recognition.compare_faces(data["encodings"],
 		#	encoding)
-		
-
-                minDist = 100
-                for person in known_encodings:
-                    #print(known_encodings[person])
-                    value = compute_loss2(encoding, known_encodings[person])
-                    if value < minDist:
-                        minDist = value
-                        identity = person
-
-                if minDist > 0.002:
-                    identity = "Unknown"
+		minDist = 100
+		for person in known_encodings:
+			#print(known_encodings[person])
+			value = compute_loss2(encoding, known_encodings[person])
+			if value < minDist:
+				minDist = value
+				identity = person
+				if minDist > 0.002:
+					identity = "Unknown"
 
 
 
 		
 		# update the list of names
 		names.append(identity)
-                if identity is 'Unknown':
-                    scores.append(minDist)
-                else:
-                    scores.append(float(minDist))
-
+		if identity is 'Unknown':
+			scores.append(minDist)
+		else:
+			scores.append(float(minDist))
+	
+	
 	# loop over the recognized faces
 	for ((top, right, bottom, left), name, score) in zip(boxes, names, scores):
 		# rescale the face coordinates
