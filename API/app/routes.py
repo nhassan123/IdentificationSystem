@@ -1,4 +1,6 @@
 from app import app
+from app import db
+from app.models import User
 from flask import Flask, redirect, url_for, request, render_template, send_from_directory
 import json
 import time
@@ -122,11 +124,15 @@ def api_root():
     if request.method == 'POST' and request.files['image']:
         img = request.files['image']
         img_name = secure_filename(img.filename)
-        create_new_folder(app.config['UPLOAD_FOLDER'])
-        saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
+        name = request.form.get('person')
+        create_new_folder(app.config['UPLOAD_FOLDER']+name)
+        saved_path = os.path.join(app.config['UPLOAD_FOLDER']+name, img_name)
         img.save(saved_path)
         name = request.form.get('person')
         new_face(saved_path, name)
+        u = User(name=name, file_path = app.config['UPLOAD_FOLDER']+name+'/'+img_name)
+        db.session.add(u)
+        db.session.commit()
         return send_from_directory(app.config['UPLOAD_FOLDER'],img_name, as_attachment=True)
     else:
         return "Where is the image?"
@@ -141,7 +147,11 @@ def recognize():
         create_new_folder(app.config['UPLOAD_FOLDER'])
         saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
         img.save(saved_path)
-        name = identify(saved_path)
+        name = identify(saved_path)  
+        if name=="Unknown":
+            create_new_folder(app.config['UPLOAD_FOLDER']+'unknown')
+            saved_path = os.path.join(app.config['UPLOAD_FOLDER']+'unknown', img_name)
+            img.save(saved_path) #bug here, image not saving correctly
         return name
     else:
         return "Where is the image?"
